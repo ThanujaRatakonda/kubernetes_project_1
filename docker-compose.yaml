@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  ui:
+    build: ./ui-service
+    container_name: studentdetails
+    ports:
+      - "5000:5000"
+    volumes:
+      - ui_data:/data
+
+  processor:
+    build: ./processor-service
+    container_name: branchdetails
+    ports:
+      - "4000:4000"
+    volumes:
+      - processor_data:/data
+
+volumes:
+  ui_data:
+  processor_data:
