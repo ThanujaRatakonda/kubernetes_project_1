@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studentdata
+  labels:
+    group: data
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studentinfo
+      tier: details
+  template:
+    metadata:
+      labels:
+        app: studentinfo
+        tier: details
+    spec:
+      containers:
+        - name: collectstudentdata
+          image: thanujaratakonda/kp1_ui
+          volumeMounts:
+            - mountPath: /data
+              name: data-volume
+          ports:
+            - containerPort: 5000
+      volumes:
+        - name: data-volume
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate

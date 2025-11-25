@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: studentsdata
+  labels:
+    group: data
+spec:
+  selector:
+    app: studentinfo
+    tier: details
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

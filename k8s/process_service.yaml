@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: processor  #same as url inside that app.py in container 1 ui
+spec:
+  selector:
+    app: branchdata
+    tier: seperatebranchinfo
+  ports:
+    - protocol: TCP
+      port: 4000
+  type: ClusterIP
+

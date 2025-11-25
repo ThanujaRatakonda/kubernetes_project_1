@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: branchinfo
+  labels:
+    group: infro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: branchdata
+      tier: seperatebranchinfo
+  template:
+    metadata:
+      labels:
+        app: branchdata
+        tier: seperatebranchinfo
+    spec:
+      containers:
+        - name: branchinfo
+          image: thanujaratakonda/kp1_process
+          ports:
+            - containerPort: 4000
+          volumeMounts:
+            - mountPath: /data
+              name: data-volume
+      volumes:
+        - name: data-volume
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
